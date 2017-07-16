@@ -1,7 +1,2 @@
-node_modules/
-*.log
-/compiled
-*.map.js
-*.js
-/src/**/*.js
-angular2-virtual-scroll-*.tgz
+.pub/
+.packages
