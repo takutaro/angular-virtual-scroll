@@ -7,12 +7,6 @@ import 'package:angular2/core.dart';
 
 @Component(
   selector: 'virtual-scroll',
-  template: '''
-    <div class="total-padding" [style.height]="scrollHeight.toString() + 'px'"></div>
-    <div class="scrollable-content" #content [style.transform]="'translateY(' + topPadding.toString() + 'px)'">
-      <ng-content></ng-content>
-    </div>
-  ''',
   styles: const ['''
     :host {
       overflow: hidden;
@@ -30,8 +24,15 @@ import 'package:angular2/core.dart';
       width: 10000px;
       height: 100%;
       position: absolute;
+      -webkit-overflow-scrolling: touch;
     }
-  ''']
+  '''],
+  template: '''
+    <div class="total-padding" #padding  tabindex="-1" [style.height]="scrollHeight.toString() + 'px'"></div>
+    <div class="scrollable-content" #content [style.transform]="'translateY(' + topPadding.toString() + 'px)'">
+      <ng-content></ng-content>
+    </div>
+  ''',
 )
 class VirtualScrollComponent implements OnInit, OnChanges {
 
@@ -41,6 +42,7 @@ class VirtualScrollComponent implements OnInit, OnChanges {
   final StreamController<List> _update$ = new StreamController<List>();
   @Output() Stream<List> get update => this._update$.stream;
 
+  @ViewChild('padding') ElementRef paddingElementRef;
   @ViewChild('content') ElementRef contentElementRef;
 
   int topPadding = 0;
@@ -55,7 +57,7 @@ class VirtualScrollComponent implements OnInit, OnChanges {
   VirtualScrollComponent(this._element) {}
 
   ngOnInit() {
-    ;
+    window.onResize.listen(this._onResize);
   }
   ngOnChanges(Map<String, SimpleChange> changes) {
     this._itemHeight = 1;
@@ -68,12 +70,16 @@ class VirtualScrollComponent implements OnInit, OnChanges {
   onScroll() {
     this._refresh();
   }
-
+  _onResize(Event e) {
+    this._refresh();
+  }
   _refresh() {
     window.requestAnimationFrame((num tick) {
       HtmlElement content = this.contentElementRef.nativeElement;
-      if (content?.children?.length > 0)
-        this._itemHeight = content.children.first.scrollHeight;
+      if (content?.children?.length > 0 && this._itemHeight == 1) {
+        this._itemHeight = Math.max(content.children.first.clientHeight, content.children.first.offsetHeight);
+        this._itemHeight = Math.max(this._itemHeight, content.children.first.scrollHeight);
+      }
       this.scrollHeight = this.items.length * this._itemHeight;
 
       HtmlElement el = this._element.nativeElement;
@@ -92,6 +98,7 @@ class VirtualScrollComponent implements OnInit, OnChanges {
           this._startup = false;
           this._refresh(); // To scroll smoothly at the first time.
         }
+        this.paddingElementRef.nativeElement.focus();
       }
     });
   }
