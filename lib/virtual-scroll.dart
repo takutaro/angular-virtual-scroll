@@ -37,7 +37,6 @@ import 'package:angular2/core.dart';
 class VirtualScrollComponent implements OnInit, OnChanges {
 
   @Input() List items = [];
-  @Input() int chgTrigger = 0;
 
   final StreamController<List> _update$ = new StreamController<List>();
   @Output() Stream<List> get update => this._update$.stream;
