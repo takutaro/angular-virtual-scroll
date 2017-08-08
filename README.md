@@ -42,7 +42,7 @@ Surround the content you want to scroll with the \<virtual-scroll\> tag.
 Import the required package.
 
 ```Dart
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:virtual_scroll/virtual-scroll.dart';
 ```
 
