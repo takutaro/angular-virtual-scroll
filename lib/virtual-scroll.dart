@@ -3,7 +3,7 @@ library virtual_scroll;
 import 'dart:async';
 import 'dart:html';
 import 'dart:math' as Math;
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 
 @Component(
   selector: 'virtual-scroll',
@@ -74,6 +74,8 @@ class VirtualScrollComponent implements OnInit, OnChanges {
   }
   _refresh() {
     window.requestAnimationFrame((num tick) {
+      if(this.items == null)
+        return;
       HtmlElement content = this.contentElementRef.nativeElement;
       if (content?.children?.length > 0 && this._itemHeight == 1) {
         this._itemHeight = Math.max(content.children.first.clientHeight, content.children.first.offsetHeight);
