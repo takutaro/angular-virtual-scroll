@@ -19,7 +19,7 @@ https://takutaro.github.io/angular-virtual-scroll-demo/build/web/
 ## Requirement
 
 * Dart >= 1.24
-* AngularDart >= 3.1
+* AngularDart >= 4.0.0-alpha+1"
 * Modern browser
 
 ## Usage
