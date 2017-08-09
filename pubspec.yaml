@@ -11,9 +11,10 @@ web:
   compiler:
     debug: dartdevc
     release: dart2js
+
 transformers:
 - angular:
-    entry_points: web/main.dart
+    entry_points: lib/virtual-scroll.dart
     resolved_identifiers:
       BrowserClient: 'package:http/browser_client.dart'
       Client: 'package:http/http.dart'
