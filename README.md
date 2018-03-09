@@ -19,7 +19,7 @@ https://takutaro.github.io/angular-virtual-scroll-demo/build/web/
 ## Requirement
 
 * Dart >= 1.24
-* AngularDart >= 4.0.0-alpha+2"
+* AngularDart >= 4.0.0"
 * Modern browser
 
 ## Usage
@@ -43,7 +43,7 @@ Import the required package.
 
 ```Dart
 import 'package:angular/angular.dart';
-import 'package:virtual_scroll/virtual-scroll.dart';
+import "package:virtual_scroll/virtual_scroll.dart";
 ```
 
 Angular component:
