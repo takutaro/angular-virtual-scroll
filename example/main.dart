@@ -2,22 +2,24 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import "package:virtual_scroll/virtual_scroll.dart";
+import 'main.template.dart' as ng;
 
 Future<Null> main() async {
-  bootstrap(AppComponent);
+  bootstrapStatic(AppComponent, [], ng.initReflector);
 }
 
 @Component(
-    selector: "demo-app",
-    template: '''
+  selector: "demo-app",
+  template: '''
   <virtual-scroll [items]="items" (update)="viewPortItems=\$event" style="width:auto; height:75vh;">
-    <div *ngFor="let item of viewPortItems;">
+    <div *ngFor="let item of viewPortItems">
         {{item.name}} Hello.
     </div>
-</virtual-scroll>
-<button (click)="add()">ADD</button>
+  </virtual-scroll>
+  <button (click)="add()">ADD</button>
   ''',
-    directives: const [VirtualScrollComponent, NgFor])
+  directives: [VirtualScrollComponent, NgFor],
+)
 class AppComponent {
   List<Item> items = []; // large list.
   List<Item> viewPortItems; // partial list.

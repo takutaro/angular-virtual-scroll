@@ -30,11 +30,8 @@ class VirtualScrollComponent implements OnInit, OnDestroy {
   @Output()
   Stream<List> get update => _update.stream;
 
-  @ViewChild('padding')
-  ElementRef paddingElementRef;
-
-  @ViewChild('content')
-  ElementRef contentElementRef;
+  DivElement total_padding;
+  DivElement scrollable_content;
 
   int topPadding = 0;
   int scrollHeight = 0;
@@ -49,6 +46,8 @@ class VirtualScrollComponent implements OnInit, OnDestroy {
   VirtualScrollComponent(this.el);
 
   void ngOnInit() {
+    total_padding = querySelector('.total-padding');
+    scrollable_content = querySelector('.scrollable-content');
     _resizeSubscription = el.onResize.listen((_) => _refresh());
     _scrollSubscription = el.onScroll.listen((_) => _refresh());
   }
@@ -62,34 +61,28 @@ class VirtualScrollComponent implements OnInit, OnDestroy {
   void _refresh() {
     window.requestAnimationFrame((num tick) {
       if (items == null) return;
-      final content = contentElementRef.nativeElement;
-      if (content?.children?.length > 0 && _itemHeight == 1) {
-        _itemHeight = Math.max(content.children.first.clientHeight,
-            content.children.first.offsetHeight);
-        _itemHeight =
-            Math.max(_itemHeight, content.children.first.scrollHeight);
+      if ((scrollable_content.children.length ?? 0) > 0 && _itemHeight == 1) {
+        _itemHeight = Math.max(scrollable_content.children.first.clientHeight, scrollable_content.children.first.offsetHeight);
+        _itemHeight = Math.max(_itemHeight, scrollable_content.children.first.scrollHeight);
       }
       scrollHeight = items.length * _itemHeight;
 
       final itemsPerView = Math.max(1, (el.clientHeight / _itemHeight).ceil());
       final topItemIndex = items.length * el.scrollTop / scrollHeight;
-      final end =
-          Math.min(topItemIndex.ceil() + itemsPerView + 1, items.length);
+      final end = Math.min(topItemIndex.ceil() + itemsPerView + 1, items.length);
       final maxStart = Math.max(0, end - itemsPerView - 1);
       final start = Math.min(maxStart, topItemIndex.floor());
       topPadding = _itemHeight * start;
 
       if (start != _previousStart || end != _previousEnd) {
-        _update.add(this
-            .items
-            .sublist(start, end)); // (update)="yourViewPortItems=\$event"
+        _update.add(this.items.sublist(start, end)); // (update)="yourViewPortItems=\$event"
         _previousStart = start;
         _previousEnd = end;
         if (_startup) {
           _startup = false;
           _refresh(); // To scroll smoothly at the first time.
         }
-        paddingElementRef.nativeElement.focus();
+        total_padding.focus();
       }
     });
   }

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.0]
+
+- update to angular 5
+
 ## [0.1.2]
 
 - update to angular 4

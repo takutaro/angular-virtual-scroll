@@ -1,21 +1,12 @@
 name: virtual_scroll
 description: virtual-scroll component for AngularDart
-version: 0.1.2
+version: 0.2.0
 environment:
-  sdk: '>=1.24.0 <2.0.0'
+  sdk: '>=2.0.0-dev.46.0 <2.0.0'
 
 dependencies:
-  angular: ^4.0.0
+  angular: ^5.0.0-alpha+9
 
 dev_dependencies:
-  browser:
-  dart_to_js_script_rewriter:
-
-transformers:
-- angular:
-    entry_points: example/main.dart
-- dart_to_js_script_rewriter
-
-web:
-  compiler:
-    debug: dartdevc
+  build_runner: ^0.8.2
+  build_web_compilers: ^0.3.6
