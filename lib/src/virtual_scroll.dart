@@ -31,10 +31,10 @@ class VirtualScrollComponent implements OnInit, OnDestroy {
   Stream<List> get update => _update.stream;
 
   @ViewChild('padding')
-  ElementRef paddingElementRef;
+  DivElement paddingElement;
 
   @ViewChild('content')
-  ElementRef contentElementRef;
+  DivElement contentElement;
 
   int topPadding = 0;
   int scrollHeight = 0;
@@ -62,8 +62,9 @@ class VirtualScrollComponent implements OnInit, OnDestroy {
   void _refresh() {
     window.requestAnimationFrame((num tick) {
       if (items == null) return;
-      final content = contentElementRef.nativeElement;
-      if (content?.children?.length > 0 && _itemHeight == 1) {
+      // final content = contentElementRef.nativeElement;
+      final content = contentElement;
+      if (content.children.length > 0 && _itemHeight == 1) {
         _itemHeight = Math.max(content.children.first.clientHeight,
             content.children.first.offsetHeight);
         _itemHeight =
@@ -71,7 +72,8 @@ class VirtualScrollComponent implements OnInit, OnDestroy {
       }
       scrollHeight = items.length * _itemHeight;
 
-      final itemsPerView = Math.max(1, (el.clientHeight / _itemHeight).ceil());
+      final itemsPerView =
+          Math.max(1, (el.clientHeight / _itemHeight).ceil());
       final topItemIndex = items.length * el.scrollTop / scrollHeight;
       final end =
           Math.min(topItemIndex.ceil() + itemsPerView + 1, items.length);
@@ -89,7 +91,7 @@ class VirtualScrollComponent implements OnInit, OnDestroy {
           _startup = false;
           _refresh(); // To scroll smoothly at the first time.
         }
-        paddingElementRef.nativeElement.focus();
+        paddingElement.focus();
       }
     });
   }
