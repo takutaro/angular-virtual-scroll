@@ -1,33 +1,32 @@
-virtual-scroll for AngularDart
-==============================
-
+# virtual-scroll for AngularDart
 
 ## Description
 
 This component scrolls the large list in the browser.
 
 I referred to the TypeScript version.<br>
-https://github.com/rintoj/angular2-virtual-scroll
+<https://github.com/rintoj/angular2-virtual-scroll>
 
 (But, my virtual-scroll is reduction version 😣)
 
 ## Demo
 
 Live demo.<br>
-https://takutaro.github.io/angular-virtual-scroll-demo/build/web/
+<https://takutaro.github.io/angular-virtual-scroll-demo/build/web/>
 
 ## Requirement
 
-* Dart >= 2.0.0
-* AngularDart >= 5.0.0"
+* Dart >=2.0.0-dev.69.4
+* AngularDart >= 5.0.0-beta"
 * Modern browser
 
 ## Usage
 
 See the following sample code.<br>
-https://github.com/takutaro/angular-virtual-scroll-demo/
+<https://github.com/takutaro/angular-virtual-scroll-demo/>
 
 Surround the content you want to scroll with the \<virtual-scroll\> tag.
+
 * Specify your large list to [items].
 * Prepare a partial list. This list is set by (update).
 * Specify width and height with style.
@@ -39,6 +38,7 @@ Surround the content you want to scroll with the \<virtual-scroll\> tag.
     </div>
 </virtual-scroll>
 ```
+
 Import the required package.
 
 ```Dart

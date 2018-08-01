@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import "package:virtual_scroll/virtual_scroll.dart";
+import 'package:virtual_scroll/virtual_scroll.dart';
 import 'main.template.dart' as ng;
 
 Future<Null> main() async {
@@ -11,12 +11,12 @@ Future<Null> main() async {
 @Component(
   selector: "demo-app",
   template: '''
-  <virtual-scroll [items]="items" (update)="viewPortItems=\$event" style="width:auto; height:75vh;">
-    <div *ngFor="let item of viewPortItems">
-        {{item.name}} Hello.
-    </div>
-  </virtual-scroll>
-  <button (click)="add()">ADD</button>
+    <virtual-scroll [items]="items" (update)="viewPortItems=\$event" style="width:auto; height:75vh;">
+      <div *ngFor="let item of viewPortItems">
+          {{item.name}} Hello.
+      </div>
+    </virtual-scroll>
+    <button (click)="add()">ADD</button>
   ''',
   directives: const [VirtualScrollComponent, NgFor],
 )
