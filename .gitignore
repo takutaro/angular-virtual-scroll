@@ -1,3 +1,5 @@
 .dart_tool/
 .pub/
+.vscode/
 .packages
+build/
