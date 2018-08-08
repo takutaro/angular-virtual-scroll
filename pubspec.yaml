@@ -9,6 +9,7 @@ dependencies:
 
 dev_dependencies:
   angular_test:
+  angular_analyzer_plugin:
   build_runner:
   build_test:
   build_web_compilers:

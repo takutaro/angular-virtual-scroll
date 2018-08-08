@@ -18,7 +18,7 @@ Future<Null> main() async {
     </virtual-scroll>
     <button (click)="add()">ADD</button>
   ''',
-  directives: const [VirtualScrollComponent, NgFor],
+  directives: [VirtualScrollComponent, NgFor],
 )
 class AppComponent {
   List<Item> items = []; // large list.

@@ -7,11 +7,11 @@ import 'package:angular/angular.dart';
 
 @Component(
   selector: 'virtual-scroll',
-  styleUrls: const ["virtual_scroll.css"],
+  styleUrls: ["virtual_scroll.css"],
   templateUrl: "virtual_scroll.html",
 )
 class VirtualScrollComponent implements OnInit, OnDestroy {
-  final _update = new StreamController<List>();
+  final _update = StreamController<List>();
   StreamSubscription<Event> _resizeSubscription;
   StreamSubscription<Event> _scrollSubscription;
 
