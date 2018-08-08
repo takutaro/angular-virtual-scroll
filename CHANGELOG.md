@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.2]
+
+- update to angular 5(stable)
+
 ## [0.2.1] [0.2.0]
 
 - update to angular 5(beta)

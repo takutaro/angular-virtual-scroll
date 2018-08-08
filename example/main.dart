@@ -25,10 +25,10 @@ class AppComponent {
   List<Item> viewPortItems; // partial list.
 
   AppComponent() {
-    for (int i = 0; i < 10000; i++) items.add(new Item("Robot $i"));
+    for (int i = 0; i < 10000; i++) items.add(Item("Robot $i"));
   }
   void add() {
-    items.add(new Item("New Robot"));
+    items.add(Item("New Robot"));
     items = items.toList(); // Make new list to detect changes.
   }
 }
